@@ -1,0 +1,84 @@
+macro = ;
+report -;
+
+/* SET UP BLOCK */
+
+var: v_from v_by v_to v_search_lvl v_RF v_TEQ;
+
+set v_from 0; set v_by 1; set v_to 20; set v_search_lvl 3; set v_RF 0; set v_TEQ 1;
+
+opendlg 150 150 390 285 Tree TUIW ;
+    frame 10 10 135 110 k-values to explore... ;
+	showtxt 20 33 70 15 From = ;
+	showtxt 20 63 70 15 By... ;
+	showtxt 20 93 70 15 To = ;
+	spin 0 999 v_from 60 30 5 20;
+	spin 1 100 v_by 60 60 5 20;
+	spin 1 1000 v_to 60 90 5 20;
+	frame 155 10 220 200 Select search... ;
+	choose v_search_lvl
+		165 35 160 15 Soft traditional.
+		165 65 160 15 Normal traditional.
+		165 95 160 15 Normal traditional + ratchet.
+		165 125 200 15 Default new techs, 3 hits.
+		165 155 200 15 Default new techs + drift, 5 hits.
+		165 185 200 15 Default new techs + more drift, 10 hits.;
+	frame 10 125 135 85 Things to do...;
+	check v_RF 20 148 120 20 Robinson-Foulds dist.;
+	check v_TEQ 20 177 120 20 Equal trees.;
+closedlg;
+
+/* CHECK BLOCK */
+
+if (exstatus == 0) proc/; end
+
+/* SEARCH LOOP */
+
+tsave* ttuiw_out.tre;
+
+silent = buffer;
+loop 'v_from'+'v_by' 'v_to'
+	progress #1 'v_to' Working...;
+	if (#1 == 0) piwe-; end
+	if (#1 > 0) piwe = #1; end
+	if ('v_search_lvl' == 0) mult = repl 50 tbr hold 3; bb = tbr; end
+	if ('v_search_lvl' == 1) mult = repl 100 tbr hold 3; bb = tbr; end
+	if ('v_search_lvl' == 2) mult = repl 100 tbr hold 3; rat = iter 50 nums 2; bb = tbr; end
+	if ('v_search_lvl' == 3) xmult = hits 3; bb = tbr; end
+	if ('v_search_lvl' == 4) xmult = hits 5 drift 10 hold 2; bb = tbr; end
+	if ('v_search_lvl' == 5) xmult = hits 10 drift 20 hold 2; bb = tbr; end
+	nel*; tch/;
+	save;
+	keep 0;
+	stop
+silent - buffer;
+progress/;
+piwe-;
+tsave/;
+
+/* COMPARISON BLOCK */
+
+if ('v_TEQ' == 1)
+silent = buffer;
+proc ttuiw_out.tre;
+silent - buffer;
+tequal;
+end
+
+if ('v_RF' == 1)
+silent = buffer;
+proc ttuiw_out.tre;
+tsave* ttuiw_out2.tre;
+unique; save;
+tsave/;
+keep 0;
+proc ttuiw_out2.tre;
+silent - buffer;
+tcomp>./.;
+silent = buffer;
+keep 0;
+report=;
+silent - buffer;
+end
+
+proc/;
