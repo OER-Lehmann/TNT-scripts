@@ -22,7 +22,7 @@ To run `ttuiw.run` you must:
 
 Below there is a detailed description of the available options and of the outputs of the script.
 
-#### k-values to explore frame
+#### k-values frame
 
 This frame allows the selection of the values of the concavity constant *k* to explore, as well as the inclution of an equal weights analysis. The "From" spinbox selects the starting value. A value of 0 indicates a first round of analysis with equal weights. The "By" spinbox selects the increment in the value of *k*. The "To" spinbox selects the highest value of *k* that is to be explored.
 
@@ -40,7 +40,7 @@ This frame allows the selection of some options to quickly compare the output of
 - Robinson-Foulds dist.: Calculate the Robinson-Foulds distance between the unique trees obtained throughout all analyses.
 - Equal trees: Show which analyses resulted in identical trees.
 
-#### Select search frame
+#### Search frame
 
 This frame allows the selection of the tree exploration strategy. All of them start with the use of traditional or new technologies and after them they perform a round of TBR with the resulting trees.
 
