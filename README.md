@@ -35,8 +35,10 @@ Note that  *k* can only take integer values in this implementation.
 
 #### Comparisons frame
 
-- Robinson-Foulds dist.:
-- Equal trees:
+This frame allows the selection of some options to quickly compare the output of the the analyses under different values of *k*.
+
+- Robinson-Foulds dist.: Calculate the Robinson-Foulds distance between the unique trees obtained throughout all analyses.
+- Equal trees: Show which analyses resulted in identical trees.
 
 #### Select search frame
 
@@ -54,9 +56,9 @@ This frame allows the selection of the tree exploration strategy. All of them st
 
 The script *always* creates a file called `ttuiw_output.tre` in the same folder where it is located. This file contains the strict consensus of the trees obtained from each analysis, in order. You should be carefully identify each tree, following the parameters you set in the k-values to explore frame. Also, the file will be overwritten if you run the script again, so be mindful and rename it and/or move it to another folder before running `ttuiw.run` again.
 
-If the option equal trees was selected, a grid will be displayed in the TNT window, showing which trees are identical between analyses. A bit of caution should be taken here, as a comparison between strict consensus trees is ill-advised as different sets of trees can produce the same strict consensus tree. This is shouldn't be a common problem as *most* matrices produce a single most parsimonious tree when analysed with implied weighting (personal observation), and thus the strict consensus is identical to the most parsimonious tree.
+If the option equal trees was selected, a grid will be displayed on the TNT window, showing which trees are identical between analyses. A bit of caution should be taken here, as a comparison between strict consensus trees is ill-advised as different sets of trees can produce the same strict consensus tree. This is shouldn't be a common problem as *most* matrices produce a single most parsimonious tree when analysed with implied weighting (personal observation), and thus the strict consensus is identical to the most parsimonious tree.
 
-If the option Robinson-Foulds dist. is selected...
+If the option Robinson-Foulds dist. is selected, a grid showing the Robinson-Foulds distance between the unique trees found through the analyses. Note that a file named `ttuiw_output2.tre` will be created. It will contain only the unique trees obtained through all analyses. For example, if all analyses yielded the same tree only one tree will be present in it. Else, the unique trees will be orderder as they appear in the analyses, which can be seen in the output of eqaul trees on the TNT window.
 
 ### Use history
 
@@ -68,6 +70,3 @@ If the option Robinson-Foulds dist. is selected...
 5. Alvarez, M.J., and del Río, C.J. 2020. Phylogeny of the Eocene Antarctic Tapetinae Gray, 1851 (Bivalvia, Veneridae) from the La Meseta and Submeseta formations. *Journal of Paleontology* **94**(5): 799-818. DOI: [10.1017/jpa.2020.30](https://doi.org/10.1017/jpa.2020.30).
 6. Pérez, D.E., and Giachetti, L.M. 2020. Is *Cyclocardia* (Conrad) a wastebasket taxon? Exploring the phylogeny of the most diverse genes of the carditidae (Archiheterodonta, Bivalvia). *Palaeontology* **63**(3):477-495. DOI: [10.1111/pala.12467](https://doi.org/10.1111/pala.12467).
 7. Viglino, M., Gaetán C.M., Cuitiño, J.I., and Buono M.R. 2021. First toothless platanistoid from the early Miocene of Patagonia: the golden age of diversification of the Odontoceti. *Journal of Mammalian Evolution* **28**:337-358. DOI: [10.1007/s10914-020-09505-w](https://doi.org/10.1007/s10914-020-09505-w).
-
-### References
-
